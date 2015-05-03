@@ -1,5 +1,5 @@
 <?php
-namespace Laratash;
+namespace Handlelars;
 
 use Illuminate\Filesystem\Filesystem;
 use Mustache_Loader;

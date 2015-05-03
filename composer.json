@@ -1,18 +1,14 @@
 {
-    "name": "brightmachine/laratash",
+    "name": "truemedia/handlelars",
     "type": "library",
-    "description": "A Laravel 5+ wrapper for mustache.php, a PHP implementation of http://mustache.github.io/",
-    "keywords": ["laravel", "laravel 5", "mustache", "php"],
-    "homepage": "https://github.com/brightmachine/laratash",
+    "description": "A Laravel 5 wrapper for Handlebars",
+    "keywords": ["laravel", "laravel 5", "handlebars", "php"],
+    "homepage": "https://github.com/Truemedia/handlelars",
     "license": "MIT",
     "authors": [
         {
-            "name":     "Conar Welsh",
-            "email":    "conar@welshlabs.com"
-        },
-        {
-            "name":     "Kelvin Jones",
-            "email":    "kelvin@brightmachine.co.uk"
+            "name":     "Wade Penistone",
+            "email":    "wadespackages@yahoo.com"
         }
     ],
     "require": {
@@ -24,7 +20,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Laratash\\": "src/"
+            "Handlelars\\": "src/"
         }
     },
     "minimum-stability": "dev"

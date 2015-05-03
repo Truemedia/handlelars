@@ -1,5 +1,5 @@
 <?php
-namespace Laratash;
+namespace Handlelars;
 
 use Illuminate\View\Engines\EngineInterface;
 use Illuminate\Filesystem\Filesystem;
@@ -20,7 +20,7 @@ class MustacheEngine implements EngineInterface
         $view = $this->files->get($path);
         $app = app();
 
-        $m = new Mustache_Engine($app['config']->get('laratash'));
+        $m = new Mustache_Engine($app['config']->get('handlelars'));
  
         if (isset($data['__context']) && is_object($data['__context'])) {
             $data = $data['__context'];

@@ -1,9 +1,9 @@
-<?php namespace Laratash;
+<?php namespace Handlelars;
 
 use Illuminate\Support\ServiceProvider;
 use Illuminate\View\ViewFinderInterface;
 
-class LaratashServiceProvider extends ServiceProvider
+class HandlelarsServiceProvider extends ServiceProvider
 {
     /**
      * Indicates if loading of the provider is deferred.
@@ -19,6 +19,7 @@ class LaratashServiceProvider extends ServiceProvider
      */
     public function register()
     {
+        die('yata');
         $this->setupConfig();
 
         $this->registerMustacheEngine();
@@ -33,19 +34,19 @@ class LaratashServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return ['laratash', 'mustache.engine'];
+        return ['handlelars', 'mustache.engine'];
     }
 
     private function setupConfig()
     {
         $config = __DIR__ . '/config/config.php';
-        $this->mergeConfigFrom($config, 'laratash');
+        $this->mergeConfigFrom($config, 'handlelars');
     }
 
     private function registerMustacheEngine()
     {
         $this->app->bind('mustache.engine', function() {
-            return $this->app->make('Laratash\MustacheEngine');
+            return $this->app->make('Handlelars\MustacheEngine');
         });
     }
 
