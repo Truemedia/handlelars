@@ -19,7 +19,6 @@ class HandlelarsServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        die('yata');
         $this->setupConfig();
 
         $this->registerMustacheEngine();
