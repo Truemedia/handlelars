@@ -20,7 +20,8 @@ class MustacheEngine implements EngineInterface
         $view = $this->files->get($path);
         $app = app();
 
-        $m = new Mustache_Engine($app['config']->get('handlelars'));
+        //$m = new Mustache_Engine($app['config']->get('handlelars'));
+        $m = new Handlebars;
  
         if (isset($data['__context']) && is_object($data['__context'])) {
             $data = $data['__context'];
