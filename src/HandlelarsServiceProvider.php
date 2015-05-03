@@ -52,8 +52,7 @@ class HandlelarsServiceProvider extends ServiceProvider
     private function registerMustacheViewExtension()
     {
         $this->app['view']->addExtension(
-            'mustache',
-            'mustache',
+            'hbs', 'hbs',
             function () {
                 return $this->app['mustache.engine'];
             }
