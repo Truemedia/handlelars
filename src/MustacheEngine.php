@@ -28,14 +28,17 @@ class MustacheEngine implements EngineInterface
         $app = app();
 
         // $m = new Mustache_Engine($app['config']->get('handlelars'));
+        // Configuration
+        $always_compile = false;
+        $helpers = \Config::get('handlelars.helpers');
 
         // Precompile templates to view cache when necessary
-        if (!$this->files->isFile($compile_path) || $template_last_modified > $cache_last_modified)
+        $ignore_cache = ($template_last_modified > $cache_last_modified || $always_compile);
+        if (!$this->files->isFile($compile_path) || $ignore_cache)
         {
-            $tpl = LightnCandy::compile($view);
+            $tpl = LightnCandy::compile($view, compact('helpers'));
             $this->files->put($compile_path, $tpl);
         }
-        $renderer = $this->files->getRequire($compile_path);
 
         if (isset($data['__context']) && is_object($data['__context'])) {
             $data = $data['__context'];
@@ -45,6 +48,7 @@ class MustacheEngine implements EngineInterface
             }, $data);
         }
  
+        $renderer = $this->files->getRequire($compile_path);
         return $renderer($data);
     }
 }
