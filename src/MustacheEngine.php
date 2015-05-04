@@ -4,6 +4,7 @@ namespace Handlelars;
 use Illuminate\View\Engines\EngineInterface;
 use Illuminate\Filesystem\Filesystem;
 use Mustache_Engine;
+use LightnCandy;
 
 class MustacheEngine implements EngineInterface
 {
@@ -17,12 +18,25 @@ class MustacheEngine implements EngineInterface
 
     public function get($path, array $data = array())
     {
+        $filename = $this->files->name($path) . '.' . $this->files->extension($path);
+        $compile_path = \Config::get('view.compiled') . DIRECTORY_SEPARATOR . $filename;
+
+        $template_last_modified = $this->files->lastModified($path);
+        $cache_last_modified = $this->files->lastModified($compile_path);
+
         $view = $this->files->get($path);
         $app = app();
 
-        //$m = new Mustache_Engine($app['config']->get('handlelars'));
-        $m = new Handlebars;
- 
+        // $m = new Mustache_Engine($app['config']->get('handlelars'));
+
+        // Precompile templates to view cache when necessary
+        if (!$this->files->isFile($compile_path) || $template_last_modified > $cache_last_modified)
+        {
+            $tpl = LightnCandy::compile($view);
+            $this->files->put($compile_path, $tpl);
+        }
+        $renderer = $this->files->getRequire($compile_path);
+
         if (isset($data['__context']) && is_object($data['__context'])) {
             $data = $data['__context'];
         } else {
@@ -31,6 +45,6 @@ class MustacheEngine implements EngineInterface
             }, $data);
         }
  
-        return $m->render($view, $data);
+        return $renderer($data);
     }
 }
