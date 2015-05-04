@@ -1,7 +1,7 @@
 handlelars
 ========
 
-A Laravel wrapper for handlebars.php, a PHP implementation of http://handlebarsjs.com/
+A Laravel wrapper for [Lightncandy](https://github.com/zordius/lightncandy), a PHP implementation of http://handlebarsjs.com/
 
 # Acknowledgements
 - Original credit to the creator of this repo https://github.com/brightmachine/laratash, all I did was rename everything to handlebars and configure the handlebars PHP library.
@@ -40,7 +40,7 @@ You are all setup!
 
 # Usage
 
-Handlelars is merely a wrapper for the [Handlebars.php](https://github.com/XaminProject/handlebars.php) library that integrates it into Laravel 5+.
+Handlelars is merely a wrapper for the [Lightncandy](https://github.com/zordius/lightncandy) library that integrates it into Laravel 5+.
 
 Handlelars registers itself with the Laravel View class, providing seamless integration with Laravel.  You can use Handlebars just as you would Blade!
 The Laravel View class will choose the right template engine to use based on the file extension of the view.  So all you have to do to render Handlebars files, is ensure that your view has a `.hbs` file extension.  Handlelars will take care of the rest.
@@ -82,7 +82,7 @@ Other than that it is business as usual!
 		Route::get('/', function()
 		{
 			return View::make('test', array(
-				'pageHeading' => 'Rendered with Handlebars.php',
+				'pageHeading' => 'Rendered with Lightncandy',
 				'pageContent' => 'But still looks like Laravel!'
 			));
 		});
@@ -116,7 +116,7 @@ Other than that it is business as usual!
 		    public function index()
 		    {
 		 	$this->layout->nest('content', 'test', array(
-		 		'pageHeading' => 'Rendered with Handlebars.php',
+		 		'pageHeading' => 'Rendered with Lightncandy',
 				'pageContent' => 'But still looks like Laravel!'
 		 	));   
 		    }
@@ -181,10 +181,10 @@ If you wish to use a Context object, pass through an array with a `__context` ke
 
 # Configure
 
-You can alter the configuration options that are passed to Handlebars.php in your `ConfigServiceProvider`. E.g. 
+You can alter the configuration options that are passed to Lightncandy in your `ConfigServiceProvider`. E.g. 
 
 	config([
 		'handlelars.cache' => storage_path() . '/framework/views/handlebars',
 	]);
 	
-All `handlelars.` options are passed directly to the Mustache_Engine constructor, so you can use any of the options that you would use with [Mustache.php](https://github.com/bobthecow/mustache.php)
+All `handlelars.` options are passed directly to the Mustache_Engine constructor, so you can use any of the options that you would use with [Lightncandy](https://github.com/zordius/lightncandy)
