@@ -22,19 +22,19 @@ class MustacheEngine implements EngineInterface
         $compile_path = \Config::get('view.compiled') . DIRECTORY_SEPARATOR . $filename;
 
         $template_last_modified = $this->files->lastModified($path);
-        $cache_last_modified = $this->files->lastModified($compile_path);
+        $cache_last_modified = ($this->files->isFile($compile_path)) ? $this->files->lastModified($compile_path) : $template_last_modified;
 
         $view = $this->files->get($path);
         $app = app();
 
         // $m = new Mustache_Engine($app['config']->get('handlelars'));
         // Configuration
-        $always_compile = false;
+        $cache_disabled = false;
         $helpers = \Config::get('handlelars.helpers');
 
         // Precompile templates to view cache when necessary
-        $ignore_cache = ($template_last_modified > $cache_last_modified || $always_compile);
-        if (!$this->files->isFile($compile_path) || $ignore_cache)
+        $compile = ($template_last_modified >= $cache_last_modified || $cache_disabled);
+        if ($compile)
         {
             $tpl = LightnCandy::compile($view, compact('helpers'));
             $this->files->put($compile_path, $tpl);
